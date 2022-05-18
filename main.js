@@ -1,5 +1,5 @@
 let text = document.createElement("h3")
-text.innerHTML = "File is not selected!"
+text.innerHTML = "Select file to create file based on JSON schema."
 document.body.appendChild(text)
 
 let invisibleInput = document.createElement("input")
@@ -22,6 +22,47 @@ function processStringType(obj) {
     document.body.append(currInput)
 }
 
+function processBooleanType(obj) {
+    let currInput = document.createElement("input")
+    currInput.type = "checkbox"
+    let txt = document.createElement("text")
+
+    txt.innerHTML = "Enabled: "
+
+    document.body.append(txt)
+    document.body.append(currInput)
+}
+
+function processObjectDescription(obj, name) {
+    let currField = document.createElement("text")
+    currField.style = "font-size:20px"
+    currField.innerHTML = `<br><br>[${obj["type"]}] <b>${name}</b><br>`
+    document.body.appendChild(currField)
+
+    let currDesc = document.createElement("text")
+    currDesc.style = "font-size:18px"
+    currDesc.innerHTML = `${obj["description"]}<br>`
+    document.body.appendChild(currDesc)
+}
+
+function processObjectType(obj, prefix = "") {
+    for (const key of Object.keys(obj["properties"])) {
+        curr = obj["properties"][key]
+
+        processObjectDescription(curr, `${prefix}${key}`)
+
+        if (curr["type"] == "string") {
+            processStringType(curr)
+        } 
+        else if (curr["type"] == "boolean") {
+            processBooleanType(curr)
+        }
+        else if (curr["type"] == "object") {
+            processObjectType(curr, `${key}.`)
+        }
+    }
+}
+
 function readJSONSchema(json) {
     let title = document.createElement("h1")
     title.innerText = json["title"]
@@ -32,25 +73,7 @@ function readJSONSchema(json) {
     document.body.appendChild(title)
     document.body.appendChild(description)
 
-    let properties = json["properties"]
-    
-    for (const key of Object.keys(properties)) {
-        curr = properties[key]
-
-        let currField = document.createElement("text")
-        currField.style = "font-size:20px"
-        currField.innerHTML = `<br><br>(${curr['type']}) <b>${key}</b><br>`
-        document.body.appendChild(currField)
-
-        let currDesc = document.createElement("text")
-        currDesc.style = "font-size:18px"
-        currDesc.innerHTML = `${curr["description"]}<br>`
-        document.body.appendChild(currDesc)
-
-        if (curr["type"] == "string") {
-            processStringType(curr)
-        }
-    }
+    processObjectType(json)
 }
 
 invisibleInput.addEventListener('change', (event) => {
