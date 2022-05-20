@@ -28,10 +28,15 @@
 }
 
 .schema_field_name {
-    display: block;
+    display: inline;
     border-radius: 5px;
     padding: 5px;
     font-size: 20px;
+}
+
+.array_add_btn {
+    display: block;
+    width: 100%;
 }
 
 .schema_field_description {
@@ -50,9 +55,9 @@
     margin: 1%;
 }
 
-.array_add_btn {
-    display: block;
-    width: 100%;
+.expand_btn {
+    display: inline-block;
+    margin-left: 90%;
 }
 
 .save_btn {
