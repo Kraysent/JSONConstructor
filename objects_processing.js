@@ -25,6 +25,11 @@ export function processObjectByType(obj) {
     return objectBlock
 }
 
+function compile(str) {
+    let txtArea = document.getElementById("result_code_textarea")
+    txtArea.innerText = str
+}
+
 function processStringType(obj) {
     let divBlock = document.createElement("div")
     divBlock.className = "schema_field_contents"
@@ -33,6 +38,9 @@ function processStringType(obj) {
     txt.innerHTML = "Enter field contents: "
 
     let currInput = document.createElement("input")
+    currInput.oninput = function (event) {
+        compile(event.target.value)
+    }
 
     divBlock.appendChild(txt)
     divBlock.appendChild(currInput)
@@ -45,7 +53,13 @@ function processIntegerType(obj) {
     divBlock.className = "schema_field_contents"
 
     let txt = document.createElement("text")
-    txt.innerHTML = "Enter number: "
+    txt.innerHTML = "Enter field contents: "
+
+    let currInput = document.createElement("input")
+    currInput.type = "number"
+
+    divBlock.appendChild(txt)
+    divBlock.appendChild(currInput)
 
     return divBlock
 }
@@ -75,7 +89,7 @@ function processArrayType(obj) {
     addBtn.className = "array_add_btn"
 
     addBtn.onclick = function () {
-        objectBlock = processObjectByType(obj["items"])
+        let objectBlock = processObjectByType(obj["items"])
 
         divBlock.appendChild(objectBlock)
     }
@@ -105,7 +119,7 @@ function processObjectType(obj) {
 
             expandButton.onclick = function () {
                 let children = currDivBlock.children
-                
+
                 for (var i = 0; i < children.length; i++) {
                     if (children[i].className != "schema_field_name" && children[i].className != "expand_btn") {
                         if (children[i].style.display == "none") {

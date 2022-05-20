@@ -2,6 +2,7 @@ import { processObjectByType } from "./objects_processing.js"
 
 let selectFileText = document.getElementById("select_file_title")
 let invisibleInput = document.getElementById("inv_input")
+let resultTextArea = document.getElementById("result_code_textarea")
 let btn = document.getElementById("open_schema_btn")
 btn.onclick = function () { invisibleInput.click() }
 let schema = document.getElementById("schema")
@@ -23,10 +24,11 @@ function processJSONSchema(json) {
     schema.appendChild(divBlock)
 }
 
-invisibleInput.addEventListener('change', (event) => {
+invisibleInput.addEventListener("change", (event) => {
     schema.innerHTML = ""
     btn.style.borderColor = "var(--file_selected)"
     selectFileText.style.backgroundColor = "var(--file_selected)"
+    resultTextArea.style.borderColor = "var(--file_selected)"
 
     let file = event.target.files[0]
     selectFileText.innerHTML = "Selected file: " + file.name
@@ -36,11 +38,6 @@ invisibleInput.addEventListener('change', (event) => {
         let result = JSON.parse(reader.result)
 
         processJSONSchema(result)
-
-        let saveButton = document.createElement("button")
-        saveButton.innerText = "Save"
-        saveButton.className = "save_btn"
-        schema.appendChild(saveButton)
     }
 
     reader.readAsText(file)

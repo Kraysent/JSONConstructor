@@ -19,13 +19,13 @@
 
     .schema_container {
         width: 50%;
-        background-color: rgb(255, 255, 255);
+        background-color: white;
         border-radius: 5px;
         margin: 0.1%;
     }
 
     .headers_container {
-        flex-grow: 1;
+        width: 50%;
         background-color: antiquewhite;
         margin: 0.1%;
         border-radius: 5px;
@@ -45,6 +45,7 @@
                 <input id="inv_input" type="file" style="display: none" />
                 <h3 id="select_file_title" class="select_file_header">Select file to create JSON based on schema.</h3>
                 <button id="open_schema_btn" class="open_schema_btn">Open JSON Schema!</button>
+                <textarea id="result_code_textarea" type="text" class="output_data_input" placeholder="Your resulting YAML would go here." readonly></textarea>
             </div>
         </div>
     </div>
