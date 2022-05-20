@@ -56,17 +56,13 @@ function processObjectType(obj, prefix = "") {
         currDivBlock.className = "schema_field"
         curr = obj["properties"][key]
 
-        let currType = document.createElement("text")
-        currType.className = "schema_field_name"
-        currType.innerHTML = curr["type"]
-
         let currField = document.createElement("text")
         currField.className = "schema_field_name"
-        currField.innerHTML = `<b>${prefix}${key}</b>`
+        currField.innerHTML = `<b>${key}</b>`
 
         let currDesc = document.createElement("text")
         currDesc.className = "schema_field_description"
-        currDesc.innerHTML = curr["description"]
+        currDesc.innerHTML = `[${curr["type"]}] ${curr["description"]}`
 
         let objectBlock = null
 
@@ -85,7 +81,6 @@ function processObjectType(obj, prefix = "") {
                 break
         }
 
-        currDivBlock.appendChild(currType)
         currDivBlock.appendChild(currField)
         currDivBlock.appendChild(currDesc)
 
