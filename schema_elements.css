@@ -1,0 +1,50 @@
+.schema {
+    text-align: center;
+    height: 100%;
+    overflow: scroll;
+}
+
+.schema_title {
+    background-color: bisque;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.schema_description {
+    background-color: bisque;
+    border-radius: 5px;
+    padding: 10px;
+    color: gray;
+}
+
+.schema_field {
+    display: block;
+    background-color: bisque;
+    border-radius: 5px;
+    padding: 5px;
+    font-size: 20px;
+}
+
+.schema_field_description {
+    display: block;
+    background-color: bisque;
+    border-radius: 5px;
+    padding: 5px;
+    font-size: 18px;
+    color: gray;
+}
+
+.schema_field_contents {
+    display: block;
+    background-color: lightblue;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.save_btn {
+    margin: 0.8%;
+    padding: 20px;
+    padding-left: 15%;
+    padding-right: 15%;
+    font-size: large;
+}
