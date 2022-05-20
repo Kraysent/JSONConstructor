@@ -1,48 +1,48 @@
-let text = document.createElement("h3")
-text.innerHTML = "Select file to create file based on JSON schema."
-document.body.appendChild(text)
-
-let invisibleInput = document.createElement("input")
-invisibleInput.type = "file"
-invisibleInput.style = "display: none"
-document.body.appendChild(invisibleInput)
-
-let btn = document.createElement("button")
-btn.innerText = "Open JSON Schema!"
+let selectFileText = document.getElementById("select_file_title")
+let invisibleInput = document.getElementById("inv_input")
+let btn = document.getElementById("open_schema_btn")
 btn.onclick = function () { invisibleInput.click() }
-document.body.appendChild(btn)
+let schema = document.getElementById("schema")
 
 function processStringType(obj) {
-    let currInput = document.createElement("input")
-    let txt = document.createElement("text")
+    let divBlock = document.createElement("div")
+    divBlock.className = "schema_field_contents"
 
+    let currInput = document.createElement("input")
+
+    let txt = document.createElement("text")
     txt.innerHTML = "Enter field contents: "
 
-    document.body.append(txt)
-    document.body.append(currInput)
+    divBlock.appendChild(txt)
+    divBlock.appendChild(currInput)
+    schema.appendChild(divBlock)
 }
 
 function processBooleanType(obj) {
-    let currInput = document.createElement("input")
-    currInput.type = "checkbox"
-    let txt = document.createElement("text")
+    let divBlock = document.createElement("div")
+    divBlock.className = "schema_field_contents"
 
+    let txt = document.createElement("text")
     txt.innerHTML = "Enabled: "
 
-    document.body.append(txt)
-    document.body.append(currInput)
+    let currInput = document.createElement("input")
+    currInput.type = "checkbox"
+
+    divBlock.appendChild(txt)
+    divBlock.appendChild(currInput)
+    schema.appendChild(divBlock)
 }
 
 function processObjectDescription(obj, name) {
     let currField = document.createElement("text")
-    currField.style = "font-size:20px"
-    currField.innerHTML = `<br><br>[${obj["type"]}] <b>${name}</b><br>`
-    document.body.appendChild(currField)
+    currField.className = "schema_field"
+    currField.innerHTML = `[${obj["type"]}] <b>${name}</b>`
+    schema.appendChild(currField)
 
     let currDesc = document.createElement("text")
-    currDesc.style = "font-size:18px"
-    currDesc.innerHTML = `${obj["description"]}<br>`
-    document.body.appendChild(currDesc)
+    currDesc.className = "schema_field_description"
+    currDesc.innerHTML = `${obj["description"]}`
+    schema.appendChild(currDesc)
 }
 
 function processObjectType(obj, prefix = "") {
@@ -53,7 +53,7 @@ function processObjectType(obj, prefix = "") {
 
         if (curr["type"] == "string") {
             processStringType(curr)
-        } 
+        }
         else if (curr["type"] == "boolean") {
             processBooleanType(curr)
         }
@@ -63,29 +63,40 @@ function processObjectType(obj, prefix = "") {
     }
 }
 
-function readJSONSchema(json) {
+function processJSONSchema(json) {
     let title = document.createElement("h1")
     title.innerText = json["title"]
+    title.className = "schema_title"
 
-    let description = document.createElement("h2")
+    let description = document.createElement("h3")
+    description.className = "schema_description"
     description.innerText = json["description"]
 
-    document.body.appendChild(title)
-    document.body.appendChild(description)
+    schema.appendChild(title)
+    schema.appendChild(description)
 
     processObjectType(json)
 }
 
 invisibleInput.addEventListener('change', (event) => {
+    schema.innerHTML = ""
+    btn.style.borderColor = "var(--file_selected)"
+    selectFileText.style.backgroundColor = "var(--file_selected)"
+
     let file = event.target.files[0]
-    text.innerHTML = "Selected file: " + file.name
+    selectFileText.innerHTML = "Selected file: " + file.name
 
     let reader = new FileReader()
     reader.onload = function () {
         result = JSON.parse(reader.result)
-        
-        readJSONSchema(result)
+
+        processJSONSchema(result)
+
+        let saveButton = document.createElement("button")
+        saveButton.innerText = "Save"
+        saveButton.className = "save_btn"
+        schema.appendChild(saveButton)
     }
-    
+
     reader.readAsText(file)
 })
