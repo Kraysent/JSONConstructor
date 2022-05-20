@@ -8,14 +8,15 @@ function processStringType(obj) {
     let divBlock = document.createElement("div")
     divBlock.className = "schema_field_contents"
 
-    let currInput = document.createElement("input")
-
     let txt = document.createElement("text")
     txt.innerHTML = "Enter field contents: "
 
+    let currInput = document.createElement("input")
+
     divBlock.appendChild(txt)
     divBlock.appendChild(currInput)
-    schema.appendChild(divBlock)
+    
+    return divBlock
 }
 
 function processBooleanType(obj) {
@@ -30,41 +31,78 @@ function processBooleanType(obj) {
 
     divBlock.appendChild(txt)
     divBlock.appendChild(currInput)
-    schema.appendChild(divBlock)
+
+    return divBlock
 }
 
-function processObjectDescription(obj, name) {
-    let currField = document.createElement("text")
-    currField.className = "schema_field"
-    currField.innerHTML = `[${obj["type"]}] <b>${name}</b>`
-    schema.appendChild(currField)
+function processArrayType(obj) {
+    let divBlock = document.createElement("div")
+    divBlock.className = "schema_field_contents"
 
-    let currDesc = document.createElement("text")
-    currDesc.className = "schema_field_description"
-    currDesc.innerHTML = `${obj["description"]}`
-    schema.appendChild(currDesc)
+    let addBtn = document.createElement("button")
+    addBtn.innerHTML = "+"
+    addBtn.className = "array_add_btn"
+
+    divBlock.appendChild(addBtn)
+
+    return divBlock
 }
 
 function processObjectType(obj, prefix = "") {
+    let divBlock = document.createElement("div")
+
     for (const key of Object.keys(obj["properties"])) {
+        let currDivBlock = document.createElement("div")
+        currDivBlock.className = "schema_field"
         curr = obj["properties"][key]
 
-        processObjectDescription(curr, `${prefix}${key}`)
+        let currType = document.createElement("text")
+        currType.className = "schema_field_name"
+        currType.innerHTML = curr["type"]
 
-        if (curr["type"] == "string") {
-            processStringType(curr)
+        let currField = document.createElement("text")
+        currField.className = "schema_field_name"
+        currField.innerHTML = `<b>${prefix}${key}</b>`
+
+        let currDesc = document.createElement("text")
+        currDesc.className = "schema_field_description"
+        currDesc.innerHTML = curr["description"]
+
+        let objectBlock = null
+
+        switch (curr["type"]) {
+            case "string":
+                objectBlock = processStringType(curr)
+                break
+            case "boolean":
+                objectBlock = processBooleanType(curr)
+                break
+            case "object":
+                objectBlock = processObjectType(curr, `${key}.`)
+                break
+            case "array":
+                objectBlock = processArrayType(curr)
+                break
         }
-        else if (curr["type"] == "boolean") {
-            processBooleanType(curr)
+
+        currDivBlock.appendChild(currType)
+        currDivBlock.appendChild(currField)
+        currDivBlock.appendChild(currDesc)
+
+        if (objectBlock != null) {
+            currDivBlock.appendChild(objectBlock)
         }
-        else if (curr["type"] == "object") {
-            processObjectType(curr, `${key}.`)
-        }
+
+        divBlock.appendChild(currDivBlock)
     }
+
+    return divBlock
 }
 
 function processJSONSchema(json) {
-    let title = document.createElement("h1")
+    let divBlock = document.createElement("div")
+
+    let title = document.createElement("h2")
     title.innerText = json["title"]
     title.className = "schema_title"
 
@@ -72,10 +110,10 @@ function processJSONSchema(json) {
     description.className = "schema_description"
     description.innerText = json["description"]
 
-    schema.appendChild(title)
-    schema.appendChild(description)
-
-    processObjectType(json)
+    divBlock.appendChild(title)
+    divBlock.appendChild(description)
+    divBlock.appendChild(processObjectType(json))
+    schema.appendChild(divBlock)
 }
 
 invisibleInput.addEventListener('change', (event) => {

@@ -1,3 +1,7 @@
+.headers {
+    text-align: center;
+}
+
 .select_file_header {
     background-color: var(--file_not_selected);
     margin: 0.8%;

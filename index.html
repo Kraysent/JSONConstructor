@@ -19,30 +19,31 @@
 
     .schema_container {
         width: 50%;
-        background-color: lightblue;
+        background-color: rgb(255, 255, 255);
         border-radius: 5px;
         margin: 0.1%;
     }
 
-    .headers {
-        margin: 0.1%;
-        border-radius: 5px;
-        text-align: center;
-
+    .headers_container {
         flex-grow: 1;
         background-color: antiquewhite;
+        margin: 0.1%;
+        border-radius: 5px;
     }
 </style>
 
 <body>
     <div class="container">
-        <div id="schema_content" class="schema_container">
+        <div id="schema_container" class="schema_container">
             <div id="schema" class="schema"></div>
         </div>
-        <div id="headers" class="headers">
-            <input id="inv_input" type="file" style="display: none" />
-            <h3 id="select_file_title" class="select_file_header">Select file to create JSON based on schema.</h3>
-            <button id="open_schema_btn" class="open_schema_btn">Open JSON Schema!</button>
+
+        <div id="headers_container" class="headers_container">
+            <div id="headers" class="headers">
+                <input id="inv_input" type="file" style="display: none" />
+                <h3 id="select_file_title" class="select_file_header">Select file to create JSON based on schema.</h3>
+                <button id="open_schema_btn" class="open_schema_btn">Open JSON Schema!</button>
+            </div>
         </div>
     </div>
 
