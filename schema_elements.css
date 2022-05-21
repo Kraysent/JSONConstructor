@@ -24,14 +24,33 @@
     border-style: solid;
     border-width: 1px;
     border-color: black;
-    background-color: lightgreen
+    background-color: var(--file_selected);
+}
+
+.field_name_block {
+    display: flex;
+    border-bottom: 1px solid silver;
 }
 
 .schema_field_name {
-    display: inline;
-    border-radius: 5px;
-    padding: 5px;
-    font-size: 25px;
+    margin: 1%;
+    font-size: 20px;
+    font-family: monospace;
+}
+
+.schema_field_type {
+    text-align: left;
+    flex: 40;
+    margin: 1%;
+    font-size: 20px;
+    font-family: monospace;
+    color: silver;
+
+}
+
+.expand_btn {
+    flex: 1;
+    margin: 1%;
 }
 
 .array_add_btn {
@@ -53,9 +72,4 @@
     border-radius: 5px;
     padding: 5px;
     margin: 1%;
-}
-
-.expand_btn {
-    display: inline-block;
-    margin-left: 90%;
 }
