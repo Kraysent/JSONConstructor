@@ -8,13 +8,13 @@ export function processObjectByType(obj, keys) {
             objectBlock = processStringType(obj, keys)
             break
         case "integer":
-            objectBlock = processIntegerType(obj)
+            objectBlock = processIntegerType(obj, keys)
             break
         case "number":
-            objectBlock = processIntegerType(obj)
+            objectBlock = processIntegerType(obj, keys)
             break
         case "boolean":
-            objectBlock = processBooleanType(obj)
+            objectBlock = processBooleanType(obj, keys)
             break
         case "object":
             objectBlock = processObjectType(obj, keys)
@@ -36,6 +36,26 @@ function compile() {
     txtArea.value = JSON.stringify(currentJSON, null, 2)
 }
 
+function arrayDeepCopy(arr) {
+    let copy = []
+
+    for (let element of arr) {
+        copy.push(element)
+    }
+
+    return copy
+}
+
+function setValueOnPath(obj, path, value) {
+    let element = obj
+
+    for (let i = 0; i < path.length - 1; i++) {
+        element = element[path[i]]
+    }
+
+    element[path[path.length - 1]] = value
+}
+
 function processStringType(obj, keys) {
     let divBlock = document.createElement("div")
     divBlock.className = "schema_field_contents"
@@ -45,21 +65,10 @@ function processStringType(obj, keys) {
     currInput.placeholder = "Enter the string here"
     currInput.type = "text"
 
-    let keysCopy = []
-    for (let key of keys) {
-        keysCopy.push(key)
-    }
+    let path = arrayDeepCopy(keys)
 
     currInput.oninput = function (event) {
-        console.log(keysCopy)
-
-        let iter = currentJSON
-        for (let i = 0; i < keysCopy.length - 1; i++) {
-            iter = iter[keysCopy[i]]
-        }
-
-        iter[keysCopy[keysCopy.length - 1]] = event.target.value
-
+        setValueOnPath(currentJSON, path, event.target.value)
         compile()
     }
 
@@ -68,7 +77,7 @@ function processStringType(obj, keys) {
     return divBlock
 }
 
-function processIntegerType(obj) {
+function processIntegerType(obj, keys) {
     let divBlock = document.createElement("div")
     divBlock.className = "schema_field_contents"
 
@@ -76,8 +85,12 @@ function processIntegerType(obj) {
     currInput.className = "schema_field_input"
     currInput.placeholder = "Enter the number here"
     currInput.type = "number"
+
+    let path = arrayDeepCopy(keys)
+
     currInput.oninput = function (event) {
-        compile(event.target.value)
+        setValueOnPath(currentJSON, path, parseFloat(event.target.value))
+        compile()
     }
 
     divBlock.appendChild(currInput)
@@ -85,13 +98,25 @@ function processIntegerType(obj) {
     return divBlock
 }
 
-function processBooleanType(obj) {
+function processBooleanType(obj, keys) {
     let divBlock = document.createElement("div")
     divBlock.className = "schema_field_contents"
 
     let currInput = document.createElement("input")
     currInput.type = "checkbox"
     currInput.className = "schema_field_checkbox"
+
+    let path = arrayDeepCopy(keys)
+
+    currInput.onchange = function (event) {
+        if (event.target.checked) {
+            setValueOnPath(currentJSON, path, true)
+        } else {
+            setValueOnPath(currentJSON, path, false)
+        }
+
+        compile()
+    }
 
     divBlock.appendChild(currInput)
 
