@@ -30,7 +30,7 @@
 
     border-radius: 6px;
     border-style: solid;
-    border-width: 1px;
+    border-width: 2px;
     border-color: var(--main_text);
 
     background-color: var(--complimentary);
@@ -110,6 +110,36 @@
     background-color: var(--primary);
 }
 
+.schema_field_checkbox {
+    appearance: none;
+    vertical-align: middle;
+    width: 30px;
+    height: 30px;
+    background-color: var(--primary);
+	box-shadow: 0 1px 4px rgba(0, 0, 0, .6);
+	padding: 9px;
+	border-radius: 3px;
+}
+
+.schema_field_checkbox:active {
+    background-color: var(--analogous_1);
+}
+
+.schema_field_checkbox:checked {
+    background-color: var(--analogous_2);
+}
+
+.schema_field_checkbox:checked:after {
+    position: relative;
+    left: 1px;
+    bottom: 5px;
+	content: '\2714';
+	font-size: 18px;
+    font-family: monospace;
+    font: bold;
+	color: #99a1a7;
+}
+
 .schema_field_contents {
     display: block;
 
@@ -118,5 +148,5 @@
 
     border-radius: 5px;
 
-    background-color: var(--analogous_1);
+    background-color: var(--analogous_2);
 }

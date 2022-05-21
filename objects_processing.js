@@ -67,13 +67,10 @@ function processBooleanType(obj) {
     let divBlock = document.createElement("div")
     divBlock.className = "schema_field_contents"
 
-    let txt = document.createElement("text")
-    txt.innerHTML = "Enabled: "
-
     let currInput = document.createElement("input")
     currInput.type = "checkbox"
+    currInput.className = "schema_field_checkbox"
 
-    divBlock.appendChild(txt)
     divBlock.appendChild(currInput)
 
     return divBlock
