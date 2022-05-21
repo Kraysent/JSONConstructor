@@ -1,9 +1,11 @@
-export function processObjectByType(obj) {
+var currentJSON = {}
+
+export function processObjectByType(obj, keys) {
     let objectBlock = null
 
     switch (obj["type"]) {
         case "string":
-            objectBlock = processStringType(obj)
+            objectBlock = processStringType(obj, keys)
             break
         case "integer":
             objectBlock = processIntegerType(obj)
@@ -15,7 +17,7 @@ export function processObjectByType(obj) {
             objectBlock = processBooleanType(obj)
             break
         case "object":
-            objectBlock = processObjectType(obj)
+            objectBlock = processObjectType(obj, keys)
             break
         case "array":
             objectBlock = processArrayType(obj)
@@ -25,20 +27,39 @@ export function processObjectByType(obj) {
     return objectBlock
 }
 
-function compile(str) {
-    let txtArea = document.getElementById("result_code_textarea")
-    txtArea.innerText = str
+export function clearCurrentJSON() {
+    currentJSON = {}
 }
 
-function processStringType(obj) {
+function compile() {
+    let txtArea = document.getElementById("result_code_textarea")
+    txtArea.value = JSON.stringify(currentJSON, null, 2)
+}
+
+function processStringType(obj, keys) {
     let divBlock = document.createElement("div")
     divBlock.className = "schema_field_contents"
 
     let currInput = document.createElement("input")
     currInput.className = "schema_field_input"
     currInput.placeholder = "Enter the string here"
+
+    let keysCopy = []
+    for (let key of keys) {
+        keysCopy.push(key)
+    }
+
     currInput.oninput = function (event) {
-        compile(event.target.value)
+        console.log(keysCopy)
+
+        let iter = currentJSON
+        for (let i = 0; i < keysCopy.length - 1; i++) {
+            iter = iter[keysCopy[i]]
+        }
+
+        iter[keysCopy[keysCopy.length - 1]] = event.target.value
+
+        compile()
     }
 
     divBlock.appendChild(currInput)
@@ -124,12 +145,12 @@ function processFieldName(name, type, parentDivBlock) {
 
     divBlock.appendChild(currField)
     divBlock.appendChild(currType)
-    
+
 
     return divBlock
 }
 
-function processObjectType(obj) {
+function processObjectType(obj, keys) {
     let divBlock = document.createElement("div")
     divBlock.className = "schema_field"
 
@@ -147,7 +168,14 @@ function processObjectType(obj) {
                 currDesc.innerHTML = `${curr["description"]}`
             }
 
-            let objectBlock = processObjectByType(curr)
+            let iter = currentJSON
+            for (let ikey of keys) {
+                iter = iter[ikey]
+            }
+            iter[key] = {}
+            keys.push(key)
+            let objectBlock = processObjectByType(curr, keys)
+            keys.pop()
 
             currDivBlock.appendChild(fieldNameDivBlock)
 

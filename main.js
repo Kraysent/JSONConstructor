@@ -1,4 +1,4 @@
-import { processObjectByType } from "./objects_processing.js" 
+import { processObjectByType, clearCurrentJSON } from "./objects_processing.js" 
 
 let selectFileText = document.getElementById("select_file_title")
 let invisibleInput = document.getElementById("inv_input")
@@ -8,6 +8,7 @@ btn.onclick = function () { invisibleInput.click() }
 let schema = document.getElementById("schema")
 
 function processJSONSchema(json) {
+    clearCurrentJSON()
     let divBlock = document.createElement("div")
 
     let title = document.createElement("h2")
@@ -20,7 +21,7 @@ function processJSONSchema(json) {
 
     divBlock.appendChild(title)
     divBlock.appendChild(description)
-    divBlock.appendChild(processObjectByType(json))
+    divBlock.appendChild(processObjectByType(json, []))
     schema.appendChild(divBlock)
 }
 
@@ -35,6 +36,7 @@ invisibleInput.addEventListener("change", (event) => {
     let reader = new FileReader()
     reader.onload = function () {
         let result = JSON.parse(reader.result)
+        resultTextArea.value = ""
 
         processJSONSchema(result)
     }
