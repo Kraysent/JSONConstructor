@@ -32,7 +32,7 @@ button:focus {
 .schema_container {
     width: 50%;
     background-color: var(--complimentary);
-    border-radius: 5px;
+    border-radius: 6px;
     margin: 0.1%;
 }
 
@@ -40,5 +40,5 @@ button:focus {
     width: 50%;
     background-color: var(--complimentary);
     margin: 0.1%;
-    border-radius: 5px;
+    border-radius: 6px;
 }

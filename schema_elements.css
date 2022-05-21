@@ -7,46 +7,60 @@
 .schema_title {
     color: var(--main_text);
     background-color: var(--primary);
-    border-radius: 5px;
+    border-radius: 6px;
     padding: 10px;
     margin-top: 0%;
     margin-bottom: 0%;
 }
 
 .schema_description {
-    background-color: var(--primary);
-    border-radius: 5px;
     padding: 10px;
     margin-top: 1%;
     margin-bottom: 0%;
+
+    border-radius: 6px;
+
     color: var(--shadow_text);
+
+    background-color: var(--primary);
 }
 
 .schema_field {
     margin: 1%;
-    border-radius: 5px;
+
+    border-radius: 6px;
     border-style: solid;
     border-width: 1px;
     border-color: var(--main_text);
+
     background-color: var(--complimentary);
 }
 
 .field_name_block {
     display: flex;
+
     border-bottom: 1px solid var(--shadow_text);
+    border-radius: 6px;
+}
+
+.field_name_block:hover {
+    background-color: var(--analogous_1);
 }
 
 .schema_field_name {
     margin: 1%;
+
     font-size: 20px;
     font-family: monospace;
     color: var(--main_text);
 }
 
 .schema_field_type {
-    text-align: left;
     flex: 40;
+
     margin: 1%;
+
+    text-align: left;
     font-size: 20px;
     font-family: monospace;
     color: var(--shadow_text);
@@ -54,28 +68,55 @@
 
 .expand_btn {
     flex: 1;
+
     margin: 1%;
+
     color: var(--main_text)
 }
 
 .array_add_btn {
     display: block;
     width: 100%;
+
     color: var(--main_text)
 }
 
 .schema_field_description {
     display: block;
-    border-radius: 5px;
+
     padding: 5px;
+
+    border-radius: 6px;
+
     font-size: 18px;
     color: var(--shadow_text);
 }
 
+.schema_field_input {
+    box-sizing: border-box;
+    width: 100%;
+
+    padding-top: 1%;
+    padding-bottom: 1%;
+    padding-left: 15px;
+
+    border-width: 0px;
+    border-radius: 6px;
+
+    font-size: 16px;
+    font-family: monospace;
+    color: var(--main_text);
+
+    background-color: var(--primary);
+}
+
 .schema_field_contents {
     display: block;
-    background-color: var(--analogous_1);
-    border-radius: 5px;
-    padding: 5px;
+
     margin: 1%;
+    padding: 5px;
+
+    border-radius: 5px;
+
+    background-color: var(--analogous_1);
 }

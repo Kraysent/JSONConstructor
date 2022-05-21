@@ -34,15 +34,13 @@ function processStringType(obj) {
     let divBlock = document.createElement("div")
     divBlock.className = "schema_field_contents"
 
-    let txt = document.createElement("text")
-    txt.innerHTML = "Enter field contents: "
-
     let currInput = document.createElement("input")
+    currInput.className = "schema_field_input"
+    currInput.placeholder = "Enter the string here"
     currInput.oninput = function (event) {
         compile(event.target.value)
     }
 
-    divBlock.appendChild(txt)
     divBlock.appendChild(currInput)
 
     return divBlock
@@ -52,13 +50,14 @@ function processIntegerType(obj) {
     let divBlock = document.createElement("div")
     divBlock.className = "schema_field_contents"
 
-    let txt = document.createElement("text")
-    txt.innerHTML = "Enter field contents: "
-
     let currInput = document.createElement("input")
+    currInput.className = "schema_field_input"
+    currInput.placeholder = "Enter the number here"
     currInput.type = "number"
+    currInput.oninput = function (event) {
+        compile(event.target.value)
+    }
 
-    divBlock.appendChild(txt)
     divBlock.appendChild(currInput)
 
     return divBlock
@@ -133,6 +132,9 @@ function processFieldName(name, type, parentDivBlock) {
     divBlock.appendChild(currField)
     divBlock.appendChild(currType)
     divBlock.appendChild(expandButton)
+    divBlock.onclick = function() {
+        expandButton.click()
+    }
 
     return divBlock
 }
