@@ -1,42 +1,16 @@
 <html>
 
 <head>
+    <link rel="stylesheet" href="general_styles.css" />
     <link rel="stylesheet" href="schema_elements.css" />
     <link rel="stylesheet" href="header_elements.css" />
 </head>
-
-<style>
-    :root {
-        --file_not_selected: rgb(145, 164, 170);
-        --file_selected: lightgreen;
-        background-color: aliceblue;
-    }
-
-    .container {
-        display: flex;
-        height: 100%;
-    }
-
-    .schema_container {
-        width: 50%;
-        background-color: white;
-        border-radius: 5px;
-        margin: 0.1%;
-    }
-
-    .headers_container {
-        width: 50%;
-        background-color: antiquewhite;
-        margin: 0.1%;
-        border-radius: 5px;
-    }
-</style>
 
 <body>
     <div class="container">
         <div id="schema_container" class="schema_container">
             <div id="schema" class="schema">
-                <h2 class="select_file_header">Schema is not selected</h2>
+                <h2 class="schema_title">Schema is not selected</h2>
             </div>
         </div>
 

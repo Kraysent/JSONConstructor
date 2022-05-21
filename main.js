@@ -26,9 +26,8 @@ function processJSONSchema(json) {
 
 invisibleInput.addEventListener("change", (event) => {
     schema.innerHTML = ""
-    btn.style.borderColor = "var(--file_selected)"
-    selectFileText.style.backgroundColor = "var(--file_selected)"
-    resultTextArea.style.borderColor = "var(--file_selected)"
+    selectFileText.style.backgroundColor = "var(--primary)"
+    resultTextArea.style.backgroundColor = "var(--primary)"
 
     let file = event.target.files[0]
     selectFileText.innerHTML = "Selected file: " + file.name

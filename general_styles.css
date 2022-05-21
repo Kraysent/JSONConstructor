@@ -1,0 +1,44 @@
+:root {
+    --primary: #453128;
+    --complimentary: #283c45;
+    --analogous_1: #45282d;
+    --analogous_2: #454028;
+    --analogous_2_transparent: rgb(69, 64, 40, 0.4);
+    --main_text: white;
+    --shadow_text: gray;
+
+    background-color: var(--complimentary);
+}
+
+button {
+    overflow: hidden;
+    border-width: 0;
+    outline: none;
+    border-radius: 6px;
+    background-color: var(--primary);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, .6);
+}
+
+button:hover,
+button:focus {
+    background-color: var(--analogous_1);
+}
+
+.container {
+    display: flex;
+    height: 100%;
+}
+
+.schema_container {
+    width: 50%;
+    background-color: var(--complimentary);
+    border-radius: 5px;
+    margin: 0.1%;
+}
+
+.headers_container {
+    width: 50%;
+    background-color: var(--complimentary);
+    margin: 0.1%;
+    border-radius: 5px;
+}

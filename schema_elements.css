@@ -2,20 +2,24 @@
     text-align: center;
     height: 100%;
     overflow-y: scroll;
-    background-color: aliceblue;
 }
 
 .schema_title {
-    background-color: bisque;
+    color: var(--main_text);
+    background-color: var(--primary);
     border-radius: 5px;
     padding: 10px;
+    margin-top: 0%;
+    margin-bottom: 0%;
 }
 
 .schema_description {
-    background-color: bisque;
+    background-color: var(--primary);
     border-radius: 5px;
     padding: 10px;
-    color: gray;
+    margin-top: 1%;
+    margin-bottom: 0%;
+    color: var(--shadow_text);
 }
 
 .schema_field {
@@ -23,19 +27,20 @@
     border-radius: 5px;
     border-style: solid;
     border-width: 1px;
-    border-color: black;
-    background-color: var(--file_selected);
+    border-color: var(--main_text);
+    background-color: var(--complimentary);
 }
 
 .field_name_block {
     display: flex;
-    border-bottom: 1px solid silver;
+    border-bottom: 1px solid var(--shadow_text);
 }
 
 .schema_field_name {
     margin: 1%;
     font-size: 20px;
     font-family: monospace;
+    color: var(--main_text);
 }
 
 .schema_field_type {
@@ -44,18 +49,19 @@
     margin: 1%;
     font-size: 20px;
     font-family: monospace;
-    color: silver;
-
+    color: var(--shadow_text);
 }
 
 .expand_btn {
     flex: 1;
     margin: 1%;
+    color: var(--main_text)
 }
 
 .array_add_btn {
     display: block;
     width: 100%;
+    color: var(--main_text)
 }
 
 .schema_field_description {
@@ -63,12 +69,12 @@
     border-radius: 5px;
     padding: 5px;
     font-size: 18px;
-    color: gray;
+    color: var(--shadow_text);
 }
 
 .schema_field_contents {
     display: block;
-    background-color: lightblue;
+    background-color: var(--analogous_1);
     border-radius: 5px;
     padding: 5px;
     margin: 1%;
