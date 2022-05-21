@@ -52,8 +52,8 @@ export function processObjectByType(obj, keys) {
 }
 
 function processStringType(obj, keys) {
-    let divBlock = document.createElement("div")
-    divBlock.className = "schema_field_contents"
+    let container = document.createElement("div")
+    container.className = "schema_field_contents"
 
     let currInput = document.createElement("input")
     currInput.className = "schema_field_input"
@@ -67,14 +67,14 @@ function processStringType(obj, keys) {
         compile()
     }
 
-    divBlock.appendChild(currInput)
+    container.appendChild(currInput)
 
-    return divBlock
+    return container
 }
 
 function processIntegerType(obj, keys) {
-    let divBlock = document.createElement("div")
-    divBlock.className = "schema_field_contents"
+    let container = document.createElement("div")
+    container.className = "schema_field_contents"
 
     let currInput = document.createElement("input")
     currInput.className = "schema_field_input"
@@ -89,14 +89,14 @@ function processIntegerType(obj, keys) {
         compile()
     }
 
-    divBlock.appendChild(currInput)
+    container.appendChild(currInput)
 
-    return divBlock
+    return container
 }
 
 function processBooleanType(obj, keys) {
-    let divBlock = document.createElement("div")
-    divBlock.className = "schema_field_contents"
+    let container = document.createElement("div")
+    container.className = "schema_field_contents"
 
     let currInput = document.createElement("input")
     currInput.type = "checkbox"
@@ -109,47 +109,53 @@ function processBooleanType(obj, keys) {
         compile()
     }
 
-    divBlock.appendChild(currInput)
+    container.appendChild(currInput)
 
-    return divBlock
+    return container
 }
 
 function processArrayType(obj, keys) {
-    let divBlock = document.createElement("div")
-    divBlock.className = "schema_field_contents"
+    let container = document.createElement("div")
+    container.className = "schema_field_contents"
 
-    let addBtn = document.createElement("button")
-    addBtn.innerHTML = "+"
-    addBtn.className = "array_add_btn"
+    let addButton = document.createElement("button")
+    addButton.innerHTML = "+"
+    addButton.className = "array_add_btn"
 
     let path = arrayDeepCopy(keys)
 
-    addBtn.onclick = function () {
-        path.push(divBlock.children.length - 1)
+    addButton.onclick = function () {
+        path.push(container.children.length - 1)
         let objectBlock = processObjectByType(obj["items"], path)
         path.pop()
 
-        divBlock.appendChild(objectBlock)
+        container.appendChild(objectBlock)
     }
 
-    divBlock.appendChild(addBtn)
+    container.appendChild(addButton)
 
-    return divBlock
+    return container
 }
 
-function processFieldName(name, type, parentDivBlock) {
-    let divBlock = document.createElement("div")
-    divBlock.className = "field_name_block"
+function processFieldHeader(name, type, description, parentDivBlock) {
+    let container = document.createElement("div")
+    container.className = "field_name_block"
 
-    let currField = document.createElement("text")
-    currField.className = "schema_field_name"
-    currField.innerHTML = `<b>${name}</b>`
+    let fieldName = document.createElement("text")
+    fieldName.className = "schema_field_name"
+    fieldName.innerHTML = `<b>${name}</b>`
 
-    let currType = document.createElement("text")
-    currType.className = "schema_field_type"
-    currType.innerHTML = `: ${type}`
+    let fieldType = document.createElement("text")
+    fieldType.className = "schema_field_type"
+    fieldType.innerHTML = `: ${type}`
 
-    divBlock.onclick = function () {
+    let fieldDesc = document.createElement("text")
+    fieldDesc.className = "schema_field_desc"
+    fieldDesc.innerHTML = 'i'
+    description = description ? description : "No description provided."
+    fieldDesc.setAttribute("description", description)
+
+    container.onclick = function () {
         let children = parentDivBlock.children
 
         for (var i = 0; i < children.length; i++) {
@@ -164,48 +170,37 @@ function processFieldName(name, type, parentDivBlock) {
         }
     }
 
-    divBlock.appendChild(currField)
-    divBlock.appendChild(currType)
+    container.appendChild(fieldName)
+    container.appendChild(fieldType)
+    container.appendChild(fieldDesc)
 
-
-    return divBlock
+    return container
 }
 
 function processObjectType(obj, keys) {
-    let divBlock = document.createElement("div")
-    divBlock.className = "schema_field"
+    let container = document.createElement("div")
+    container.className = "schema_field"
 
     if ("properties" in obj) {
         for (const key of Object.keys(obj["properties"])) {
             let curr = obj["properties"][key]
 
-            let currDivBlock = document.createElement("div")
-            let fieldNameDivBlock = processFieldName(key, curr["type"], currDivBlock)
-            let currDesc = null
-
-            if ("description" in curr) {
-                currDesc = document.createElement("text")
-                currDesc.className = "schema_field_description"
-                currDesc.innerHTML = `${curr["description"]}`
-            }
+            let currContainer = document.createElement("div")
+            let fieldNameDivBlock = processFieldHeader(key, curr["type"], curr["description"], currContainer)
 
             keys.push(key)
             let objectBlock = processObjectByType(curr, keys)
             keys.pop()
 
-            currDivBlock.appendChild(fieldNameDivBlock)
-
-            if (currDesc != null) {
-                currDivBlock.appendChild(currDesc)
-            }
+            currContainer.appendChild(fieldNameDivBlock)
 
             if (objectBlock != null) {
-                currDivBlock.appendChild(objectBlock)
+                currContainer.appendChild(objectBlock)
             }
 
-            divBlock.appendChild(currDivBlock)
+            container.appendChild(currContainer)
         }
     }
 
-    return divBlock
+    return container
 }

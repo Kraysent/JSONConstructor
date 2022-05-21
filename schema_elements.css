@@ -43,8 +43,9 @@
 .field_name_block {
     display: flex;
 
-    border-bottom: 1px solid var(--shadow_text);
+    border-top: 0.5px solid var(--shadow_text);
     border-radius: 6px;
+
     transition: background-color .5s;
 }
 
@@ -62,7 +63,7 @@
 }
 
 .schema_field_type {
-    flex: 40;
+    flex: 30;
 
     margin: 1%;
 
@@ -70,6 +71,56 @@
     font-size: 20px;
     font-family: monospace;
     color: var(--shadow_text);
+}
+
+.schema_field_desc {
+    margin: 0.3%;
+    padding: 1%;
+    width: 3%;
+
+    border-radius: 6px;
+    border-color: var(--main_text);
+    background-color: var(--complimentary);
+
+    color: var(--main_text);
+    transition: background-color .5s;
+}
+
+.schema_field_desc:hover {
+    background-color: var(--primary);
+}
+
+[description] {
+    position: relative;
+}
+
+[description]:hover::after {
+    opacity: 1;
+    transition: 0.5s;
+    visibility: visible;
+}
+
+[description]:after {
+    position: absolute;
+    right: 0%;
+    bottom: 120%;
+    width: 1500%;
+
+    padding: 5px;
+    border-width: 1px;
+    border-radius: 6px;
+    border-style: solid;
+    border-color: var(--main_text);
+
+    font-size: 15;
+    font-family: monospace;
+    text-align: left;
+    content: attr(description);
+    color: var(--main_text);
+
+    opacity: 0;
+    visibility: hidden;
+    background-color: var(--primary);
 }
 
 .array_add_btn {
@@ -99,9 +150,9 @@
     width: 30px;
     height: 30px;
     background-color: var(--primary);
-	box-shadow: 0 1px 4px rgba(0, 0, 0, .6);
-	padding: 9px;
-	border-radius: 3px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, .6);
+    padding: 9px;
+    border-radius: 3px;
 }
 
 .schema_field_checkbox:active {
@@ -116,11 +167,11 @@
     position: relative;
     left: 1px;
     bottom: 5px;
-	content: '\2714';
-	font-size: 18px;
+    content: '\2714';
+    font-size: 18px;
     font-family: monospace;
     font: bold;
-	color: #99a1a7;
+    color: #99a1a7;
 }
 
 .schema_field_contents {
