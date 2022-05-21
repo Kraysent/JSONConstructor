@@ -43,6 +43,7 @@ function processStringType(obj, keys) {
     let currInput = document.createElement("input")
     currInput.className = "schema_field_input"
     currInput.placeholder = "Enter the string here"
+    currInput.type = "text"
 
     let keysCopy = []
     for (let key of keys) {

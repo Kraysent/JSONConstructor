@@ -1,0 +1,19 @@
+button {
+    overflow: hidden;
+
+    border-radius: 6px;
+    border-width: 0px;
+    
+    box-shadow: 0 1px 4px rgba(0, 0, 0, .6);
+    color: var(--main_text);
+
+    cursor: pointer;
+
+    background-color: var(--primary);
+    transition: background-color 0.5s;
+}
+
+button:hover,
+button:focus {
+    background-color: var(--analogous_1);
+}

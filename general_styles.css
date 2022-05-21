@@ -1,39 +1,13 @@
 :root {
-    --primary: #453128;
-    --complimentary: #283c45;
-    --analogous_1: #45282d;
-    --analogous_2: #454028;
+    --primary: #141a24;
+    --complimentary: #020811;
+    --analogous_1: #5c474b;
+    --analogous_2: #012abb;
     --analogous_2_transparent: rgb(69, 64, 40, 0.4);
     --main_text: white;
     --shadow_text: gray;
 
     background-color: var(--complimentary);
-}
-
-button {
-    overflow: hidden;
-    border-width: 0;
-    outline: none;
-    border-radius: 6px;
-    background-color: var(--primary);
-    box-shadow: 0 1px 4px rgba(0, 0, 0, .6);
-}
-
-button:hover,
-button:focus {
-    background-color: var(--analogous_1);
-}
-
-/* Hide arrows on the numeric input */
-/* Chrome, Safari, Edge, Opera */
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-/* Firefox */
-input[type=number] {
-  -moz-appearance: textfield;
 }
 
 .container {

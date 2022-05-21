@@ -7,26 +7,24 @@
 }
 
 .select_file_header {
-    background-color: var(--primary);
-    margin: 0.8%;
-    border-radius: 6px;
     padding: 10px;
+    margin: 0.8%;
+
+    border-radius: 6px;
+    border-width: 1px;
+    border-color: var(--main_text);
+
     color: var(--main_text);
+    background-color: var(--primary);
 }
 
 .open_schema_btn {
-    position: relative;
-
     display: block;
+
     margin: 0.8%;
     padding: 20px;
     margin-left: 15%;
     margin-right: 15%;
-
-    /* background-color: var(--file_not_selected); */
-    color: var(--main_text);
-
-    transition: background-color .3s;
 }
 
 .output_data_input {

@@ -2,6 +2,8 @@
     text-align: center;
     height: 100%;
     overflow-y: scroll;
+    scrollbar-width: auto;
+    scrollbar-color: var(--primary) var(--complimentary);
 }
 
 .schema_title {
@@ -9,12 +11,14 @@
     background-color: var(--primary);
     border-radius: 6px;
     padding: 10px;
+    margin: 0.5%;
     margin-top: 0%;
     margin-bottom: 0%;
 }
 
 .schema_description {
     padding: 10px;
+    margin: 0.5%;
     margin-top: 1%;
     margin-bottom: 0%;
 
@@ -41,10 +45,12 @@
 
     border-bottom: 1px solid var(--shadow_text);
     border-radius: 6px;
+    transition: background-color .5s;
 }
 
 .field_name_block:hover {
     background-color: var(--analogous_1);
+    cursor: pointer;
 }
 
 .schema_field_name {
@@ -69,8 +75,6 @@
 .array_add_btn {
     display: block;
     width: 100%;
-
-    color: var(--main_text)
 }
 
 .schema_field_description {
@@ -87,19 +91,6 @@
 .schema_field_input {
     box-sizing: border-box;
     width: 100%;
-
-    padding-top: 1%;
-    padding-bottom: 1%;
-    padding-left: 15px;
-
-    border-width: 0px;
-    border-radius: 6px;
-
-    font-size: 16px;
-    font-family: monospace;
-    color: var(--main_text);
-
-    background-color: var(--primary);
 }
 
 .schema_field_checkbox {
@@ -114,7 +105,7 @@
 }
 
 .schema_field_checkbox:active {
-    background-color: var(--analogous_1);
+    background-color: var(--analogous_2);
 }
 
 .schema_field_checkbox:checked {
