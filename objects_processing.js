@@ -99,10 +99,6 @@ function processFieldName(name, type, parentDivBlock) {
     let divBlock = document.createElement("div")
     divBlock.className = "field_name_block"
 
-    let expandButton = document.createElement("button")
-    expandButton.innerHTML = "^"
-    expandButton.className = "expand_btn"
-
     let currField = document.createElement("text")
     currField.className = "schema_field_name"
     currField.innerHTML = `<b>${name}</b>`
@@ -111,7 +107,7 @@ function processFieldName(name, type, parentDivBlock) {
     currType.className = "schema_field_type"
     currType.innerHTML = `: ${type}`
 
-    expandButton.onclick = function () {
+    divBlock.onclick = function () {
         let children = parentDivBlock.children
 
         for (var i = 0; i < children.length; i++) {
@@ -128,10 +124,7 @@ function processFieldName(name, type, parentDivBlock) {
 
     divBlock.appendChild(currField)
     divBlock.appendChild(currType)
-    divBlock.appendChild(expandButton)
-    divBlock.onclick = function() {
-        expandButton.click()
-    }
+    
 
     return divBlock
 }

@@ -66,14 +66,6 @@
     color: var(--shadow_text);
 }
 
-.expand_btn {
-    flex: 1;
-
-    margin: 1%;
-
-    color: var(--main_text)
-}
-
 .array_add_btn {
     display: block;
     width: 100%;
