@@ -1,7 +1,31 @@
+import { arrayDeepCopy, setValueOnPath } from "./miscellaneous.js"
+
 var currentJSON = {}
+
+export function clearCurrentJSON() {
+    currentJSON = {}
+}
+
+function compile() {
+    let txtArea = document.getElementById("result_code_textarea")
+    txtArea.value = JSON.stringify(currentJSON, null, 2)
+}
 
 export function processObjectByType(obj, keys) {
     let objectBlock = null
+
+    let defaults = {
+        "string": "",
+        "integer": 0,
+        "number": 0,
+        "boolean": false,
+        "object": {},
+        "array": []
+    }
+
+    if (keys.length != 0) {
+        setValueOnPath(currentJSON, keys, defaults[obj["type"]])
+    }
 
     switch (obj["type"]) {
         case "string":
@@ -20,40 +44,11 @@ export function processObjectByType(obj, keys) {
             objectBlock = processObjectType(obj, keys)
             break
         case "array":
-            objectBlock = processArrayType(obj)
+            objectBlock = processArrayType(obj, keys)
             break
     }
 
     return objectBlock
-}
-
-export function clearCurrentJSON() {
-    currentJSON = {}
-}
-
-function compile() {
-    let txtArea = document.getElementById("result_code_textarea")
-    txtArea.value = JSON.stringify(currentJSON, null, 2)
-}
-
-function arrayDeepCopy(arr) {
-    let copy = []
-
-    for (let element of arr) {
-        copy.push(element)
-    }
-
-    return copy
-}
-
-function setValueOnPath(obj, path, value) {
-    let element = obj
-
-    for (let i = 0; i < path.length - 1; i++) {
-        element = element[path[i]]
-    }
-
-    element[path[path.length - 1]] = value
 }
 
 function processStringType(obj, keys) {
@@ -89,7 +84,8 @@ function processIntegerType(obj, keys) {
     let path = arrayDeepCopy(keys)
 
     currInput.oninput = function (event) {
-        setValueOnPath(currentJSON, path, parseFloat(event.target.value))
+        let value = parseFloat(event.target.value)
+        setValueOnPath(currentJSON, path, value ? value : 0)
         compile()
     }
 
@@ -109,12 +105,7 @@ function processBooleanType(obj, keys) {
     let path = arrayDeepCopy(keys)
 
     currInput.onchange = function (event) {
-        if (event.target.checked) {
-            setValueOnPath(currentJSON, path, true)
-        } else {
-            setValueOnPath(currentJSON, path, false)
-        }
-
+        setValueOnPath(currentJSON, path, event.target.checked)
         compile()
     }
 
@@ -123,7 +114,7 @@ function processBooleanType(obj, keys) {
     return divBlock
 }
 
-function processArrayType(obj) {
+function processArrayType(obj, keys) {
     let divBlock = document.createElement("div")
     divBlock.className = "schema_field_contents"
 
@@ -131,8 +122,12 @@ function processArrayType(obj) {
     addBtn.innerHTML = "+"
     addBtn.className = "array_add_btn"
 
+    let path = arrayDeepCopy(keys)
+
     addBtn.onclick = function () {
-        let objectBlock = processObjectByType(obj["items"])
+        path.push(divBlock.children.length - 1)
+        let objectBlock = processObjectByType(obj["items"], path)
+        path.pop()
 
         divBlock.appendChild(objectBlock)
     }
@@ -194,11 +189,6 @@ function processObjectType(obj, keys) {
                 currDesc.innerHTML = `${curr["description"]}`
             }
 
-            let iter = currentJSON
-            for (let ikey of keys) {
-                iter = iter[ikey]
-            }
-            iter[key] = {}
             keys.push(key)
             let objectBlock = processObjectByType(curr, keys)
             keys.pop()
