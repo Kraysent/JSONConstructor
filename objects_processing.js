@@ -137,7 +137,7 @@ function processArrayType(obj, keys) {
     return container
 }
 
-function processFieldHeader(name, type, description, parentDivBlock) {
+function processFieldHeader(name, type, description, parentDivBlock, required = false) {
     let container = document.createElement("div")
     container.className = "field_name_block"
 
@@ -147,7 +147,7 @@ function processFieldHeader(name, type, description, parentDivBlock) {
 
     let fieldType = document.createElement("text")
     fieldType.className = "schema_field_type"
-    fieldType.innerHTML = `: ${type}`
+    fieldType.innerHTML = required ? `: required ${type}` : `: ${type}`
 
     let fieldDesc = document.createElement("text")
     fieldDesc.className = "schema_field_desc"
@@ -180,13 +180,17 @@ function processFieldHeader(name, type, description, parentDivBlock) {
 function processObjectType(obj, keys) {
     let container = document.createElement("div")
     container.className = "schema_field"
+    let required = obj["required"]
 
     if ("properties" in obj) {
         for (const key of Object.keys(obj["properties"])) {
             let curr = obj["properties"][key]
 
             let currContainer = document.createElement("div")
-            let fieldNameDivBlock = processFieldHeader(key, curr["type"], curr["description"], currContainer)
+            let fieldNameDivBlock = processFieldHeader(
+                key, curr["type"], curr["description"], currContainer, 
+                !required ? false : required.includes(key)
+            )
 
             keys.push(key)
             let objectBlock = processObjectByType(curr, keys)
