@@ -1,0 +1,44 @@
+html {
+    --primary: var(--primary_dark);
+    --complimentary: var(--complimentary_dark);
+    --analogous_1: var(--analogous_1_dark);
+    --analogous_2: var(--analogous_2_dark);
+    --analogous_2_transparent: var(--analogous_2_dark_transparent);
+    --main_text: var(--main_text_dark);
+    --shadow_text: var(--shadow_text_dark);
+
+    --primary_dark: #2f1433;
+    --complimentary_dark: #020811;
+    --analogous_1_dark: #5c474b;
+    --analogous_2_dark: #012abb;
+    --analogous_2_dark_transparent: rgb(69, 64, 40, 0.4);
+    --main_text_dark: white;
+    --shadow_text_dark: gray;
+
+    --primary_light: #83d6af;
+    --complimentary_light: #b0c1e1;
+    --analogous_1_light: #83d686;
+    --analogous_2_light: #83d3d6;
+    --analogous_2_light_transparent: rgb(69, 64, 40, 0.4);
+    --main_text_light: black;
+    --shadow_text_light: gray;
+
+    background-color: var(--complimentary);
+}
+
+.container {
+    display: flex;
+    height: 100%;
+}
+
+.schema_container {
+    width: 50%;
+    background-color: var(--complimentary);
+    margin: 0.1%;
+}
+
+.headers_container {
+    width: 50%;
+    background-color: var(--complimentary);
+    margin: 0.1%;
+}

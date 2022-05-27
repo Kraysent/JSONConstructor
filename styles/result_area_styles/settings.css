@@ -1,0 +1,54 @@
+.settings {
+    margin: 0.8%;
+    width: 6%;
+}
+
+.settings:hover .settings_content {
+    opacity: 1;
+    visibility: visible;
+}
+
+.settings_button {
+    padding: 10px;
+    width: 100%;
+    height: 100%;
+
+    border-radius: 6px;
+    border-color: var(--main_text);
+
+    color: var(--main_text);
+    background-color: var(--primary);
+}
+
+.settings_content {
+    position: relative;
+    visibility: hidden;
+    opacity: 0;
+    width: 700%;
+    right: 600%;
+
+    transition: opacity 0.5s;
+}
+
+.settings_item {
+    padding: 10px;
+
+    border-width: 1px;
+    border-style: solid;
+    border-color: var(--main_text);
+    border-radius: 6px;
+
+    font-size: 20;
+
+    background-color: var(--primary);
+    text-align: left;
+    color: var(--main_text);
+}
+
+.settings_item_text {}
+
+.settings_item_checkbox {
+    position: absolute;
+    right: 1%;
+    top: 10%;
+}

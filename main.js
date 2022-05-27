@@ -1,10 +1,7 @@
 import { processObjectByType, clearCurrentJSON } from "./objects_processing.js" 
+import { setup } from "./setup_handlers.js"
 
-let selectFileText = document.getElementById("select_file_title")
-let invisibleInput = document.getElementById("inv_input")
-let resultTextArea = document.getElementById("result_code_textarea")
-let btn = document.getElementById("open_schema_btn")
-btn.onclick = function () { invisibleInput.click() }
+setup()
 let schema = document.getElementById("schema")
 
 function processJSONSchema(json) {
@@ -25,10 +22,12 @@ function processJSONSchema(json) {
     schema.appendChild(divBlock)
 }
 
+let invisibleInput = document.getElementById("inv_input")
+
 invisibleInput.addEventListener("change", (event) => {
+    let selectFileText = document.getElementById("select_file_title")
+    let resultTextArea = document.getElementById("result_code_textarea")
     schema.innerHTML = ""
-    selectFileText.style.backgroundColor = "var(--primary)"
-    resultTextArea.style.backgroundColor = "var(--primary)"
 
     let file = event.target.files[0]
     selectFileText.innerHTML = "Selected file: " + file.name

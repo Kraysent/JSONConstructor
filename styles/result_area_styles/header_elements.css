@@ -7,7 +7,13 @@
     height: 100%;
 }
 
+.info_container {
+    height: 6%;
+    display: flex;
+}
+
 .select_file_header {
+    flex: 30;
     padding: 10px;
     margin: 0.8%;
 

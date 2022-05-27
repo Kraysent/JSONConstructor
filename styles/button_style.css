@@ -4,7 +4,7 @@ button {
     border-radius: 6px;
     border-width: 0px;
     
-    box-shadow: 0 1px 4px rgba(0, 0, 0, .6);
+    box-shadow: 0 0.5px 4px var(--main_text);
     color: var(--main_text);
 
     cursor: pointer;

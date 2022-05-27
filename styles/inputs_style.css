@@ -1,0 +1,64 @@
+input[type=number],
+input[type=text] {
+  padding-top: 1%;
+  padding-bottom: 1%;
+  padding-left: 15px;
+
+  border-width: 0px;
+  border-radius: 6px;
+
+  font-size: 16px;
+  font-family: monospace;
+  color: var(--main_text);
+
+  background-color: var(--primary);
+
+
+  /* Hide arrows on the numeric input, Firefox*/
+  -moz-appearance: textfield;
+}
+
+/* Hide arrows on the numeric input */
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=checkbox] {
+  appearance: none;
+  vertical-align: middle;
+
+  width: 30px;
+  height: 30px;
+  padding: 9px;
+
+  box-shadow: 0 1px 4px rgba(0, 0, 0, .6);
+
+  border-radius: 3px;
+  border-width: 0.5px;
+  border-color: var(--main_text);
+  border-style: solid;
+
+  background-color: var(--primary);
+}
+
+input[type=checkbox]:active {
+  background-color: var(--analogous_2);
+}
+
+input[type=checkbox]:checked {
+  background-color: var(--analogous_2);
+}
+
+input[type=checkbox]:checked:after {
+  position: relative;
+  left: 1px;
+  bottom: 5px;
+  content: '\2714';
+  font-size: 18px;
+  font-family: monospace;
+  font: bold;
+  color: #99a1a7;
+}

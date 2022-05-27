@@ -1,11 +1,12 @@
 <html>
 
 <head>
-    <link rel="stylesheet" href="general_styles.css" />
-    <link rel="stylesheet" href="button_style.css" />
-    <link rel="stylesheet" href="inputs_style.css" />
-    <link rel="stylesheet" href="schema_elements.css" />
-    <link rel="stylesheet" href="header_elements.css" />
+    <link rel="stylesheet" href="styles/general_styles.css" />
+    <link rel="stylesheet" href="styles/button_style.css" />
+    <link rel="stylesheet" href="styles/inputs_style.css" />
+    <link rel="stylesheet" href="styles/schema_elements.css" />
+    <link rel="stylesheet" href="styles/result_area_styles/header_elements.css" />
+    <link rel="stylesheet" href="styles/result_area_styles/settings.css" />
 </head>
 
 <body>
@@ -19,15 +20,30 @@
         <div id="headers_container" class="headers_container">
             <div id="headers" class="headers">
                 <input id="inv_input" type="file" style="display: none" />
-                <h3 id="select_file_title" class="select_file_header">Select file to create JSON based on schema.</h3>
+
+                <div class="info_container">
+                    <h3 id="select_file_title" class="select_file_header">
+                        Select file to create JSON based on schema.
+                    </h3>
+                    <div class="settings">
+                        <button class="settings_button">§</button>
+                        <div class="settings_content">
+                            <div class="settings_item">
+                                <text class="setting_item_text">Light theme enabled</text>
+                                <input type="checkbox" class="settings_item_checkbox" id="light_theme_checkbox"></input>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <button id="open_schema_btn" class="open_schema_btn">Open JSON Schema!</button>
-                <textarea id="result_code_textarea" type="text" class="output_data_input" placeholder="Your resulting JSON would go here." readonly></textarea>
+                <textarea id="result_code_textarea" type="text" class="output_data_input"
+                    placeholder="Your resulting JSON would go here." readonly></textarea>
             </div>
         </div>
     </div>
 
     <script src="main.js" type="module"></script>
-    <script src="objects_processing.js" type="module"></script>
 </body>
 
 </html>
